@@ -1,0 +1,71 @@
+.skills{
+    color: #c7493a;
+    padding: 100px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+h1{
+    font-size: 40px;
+}
+
+.cont h1{
+    font-size: 24px;
+    color: black;
+}
+
+.cont{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-around;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.cont>div{
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 120px;
+    background-color: white;
+}
+
+.cont>div:hover{
+    background-color: #c7493a;
+}
+
+.cont img{
+    height: 75px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px){
+    .cont{
+        width: 100%;
+    }
+    .cont>div{
+        width: 80px;
+    }
+    .cont h1{
+        font-size: 16px;
+    }
+}
+
+@media all and (min-width: 320px) and (max-width: 767px){
+    .cont{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 30px;
+        width: 50%;
+    }
+    h1{
+        font-size: 30px;
+    }
+    .cont>div{
+        margin: auto;
+        margin-top: 20px;
+    }
+    .cont h1{
+        font-size: 16px;
+    }
+}

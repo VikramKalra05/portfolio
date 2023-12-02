@@ -1,0 +1,55 @@
+.navbar{
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    padding-right: 200px;
+}
+
+.logo img{
+    height: 50px;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.pages{
+    display: flex;
+    width: 55%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pages a{
+    font-size: 20px;
+    padding: 15px;
+    text-decoration: none;
+    color: #c7493a;
+    font-weight: 600;
+    height: auto;
+}
+
+.pages a:hover{
+    background-color: #a33327;
+    color: white;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px){
+    .pages{
+        width: 70%;
+    }
+    .pages a{
+        font-size: 18px;
+    }
+}
