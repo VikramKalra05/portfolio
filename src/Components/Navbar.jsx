@@ -39,7 +39,8 @@ export default function Navbar(){
                 <img src="https://www.valiantglass.com.au/wp-content/pushups/2019/06/vgs-fav-1.png" alt="logo" />
             </AnchorLink>
             <div className={styles.pages}>
-                {isMobileScreen ? <IconMenu /> : <Pages />}
+                {/* {isMobileScreen ? <IconMenu /> : <Pages />} */}
+                <Pages />
             </div>
         </div>
     )
@@ -77,39 +78,39 @@ const Pages = () => {
     )
 }
 
-const IconMenu = () => {
-    return (
-        <Menu>
-        <MenuButton as="div" cursor="pointer" padding="15px">
-            <HamburgerIcon boxSize={6} />
-        </MenuButton>
-        <MenuList>
-          <MenuItem>
-            <AnchorLink href="#home">
-                Home
-            </AnchorLink>
-          </MenuItem>
-          <MenuItem>
-            <AnchorLink href="#skills">
-                Skills
-            </AnchorLink>
-          </MenuItem>
-          <MenuItem>
-            <AnchorLink href="#projects">
-                Projects
-            </AnchorLink>
-          </MenuItem>
-          <MenuItem>
-            <AnchorLink href="#contact">
-                Contact
-            </AnchorLink>
-          </MenuItem>
-          <MenuItem>
-            <a href={Resume} onClick={openResume} download="Vikram-Kalra-Resume">
-                Resume
-            </a>
-          </MenuItem>          
-        </MenuList>
-      </Menu>
-    )
-}
+// const IconMenu = () => {
+//     return (
+//         <Menu>
+//         <MenuButton as="div" cursor="pointer" padding="15px">
+//             <HamburgerIcon boxSize={6} />
+//         </MenuButton>
+//         <MenuList>
+//           <MenuItem>
+//             <AnchorLink href="#home">
+//                 Home
+//             </AnchorLink>
+//           </MenuItem>
+//           <MenuItem>
+//             <AnchorLink href="#skills">
+//                 Skills
+//             </AnchorLink>
+//           </MenuItem>
+//           <MenuItem>
+//             <AnchorLink href="#projects">
+//                 Projects
+//             </AnchorLink>
+//           </MenuItem>
+//           <MenuItem>
+//             <AnchorLink href="#contact">
+//                 Contact
+//             </AnchorLink>
+//           </MenuItem>
+//           <MenuItem>
+//             <a href={Resume} onClick={openResume} download="Vikram-Kalra-Resume">
+//                 Resume
+//             </a>
+//           </MenuItem>          
+//         </MenuList>
+//       </Menu>
+//     )
+// }
