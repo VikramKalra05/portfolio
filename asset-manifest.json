@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.c8fca98e.css",
-    "main.js": "/portfolio/static/js/main.1c4faa4d.js",
+    "main.css": "/portfolio/static/css/main.51a7a63f.css",
+    "main.js": "/portfolio/static/js/main.d4138c1f.js",
     "static/js/787.2dcca737.chunk.js": "/portfolio/static/js/787.2dcca737.chunk.js",
     "static/media/fathom.png": "/portfolio/static/media/fathom.635a5b76371ffd1b69cd.png",
     "static/media/Vikram-Kalra-Photo.jpg": "/portfolio/static/media/Vikram-Kalra-Photo.8fe5fe9d19d37c73bcf3.jpg",
     "static/media/Vikram-Kalra-Resume.pdf": "/portfolio/static/media/Vikram-Kalra-Resume.c90de16b6ffbe88d876a.pdf",
     "index.html": "/portfolio/index.html",
-    "main.c8fca98e.css.map": "/portfolio/static/css/main.c8fca98e.css.map",
-    "main.1c4faa4d.js.map": "/portfolio/static/js/main.1c4faa4d.js.map",
+    "main.51a7a63f.css.map": "/portfolio/static/css/main.51a7a63f.css.map",
+    "main.d4138c1f.js.map": "/portfolio/static/js/main.d4138c1f.js.map",
     "787.2dcca737.chunk.js.map": "/portfolio/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c8fca98e.css",
-    "static/js/main.1c4faa4d.js"
+    "static/css/main.51a7a63f.css",
+    "static/js/main.d4138c1f.js"
   ]
 }
