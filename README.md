@@ -1,19 +1,22 @@
 # Vikram Kalra's Portfolio
 
-Welcome to my portfolio! 👋 I'm Vikram Kalra, a passionate React Developer based in Bhilai, CG, India.
+Welcome to my portfolio! 👋 I'm Vikram Kalra, a passionate Full Stack Web Developer based in Bhilai, CG, India.
 
 ## About Me
 
-Motivated front-end developer with expertise in HTML, CSS, and JavaScript. Proficient in React and currently mastering the MERN stack. Eager to contribute technical acumen to create seamless user interfaces.
+Motivated Full Stack Web Developer with expertise in JavaScript and the MERN stack. Skilled in designing and implementing efficient server-side APIs and creating seamless frontend components using React.js. Strong problem-solving abilities and attention to detail. Excellent communicator and collaborator, eager to contribute to a dynamic team environment.
 
 ## Tech Stack
 
 - HTML5
 - CSS3
 - JavaScript
+- MongoDB
+- Express
 - React
+- Node.js
 - Chakra UI
-- Netlify
+- Postman
 
 ## Portfolio
 

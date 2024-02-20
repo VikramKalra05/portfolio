@@ -5,7 +5,7 @@ export default function About(){
         <div className={styles.about} id="about">
             <h2>About</h2>
             <h1>I'm Vikram Kalra</h1>
-            <p>Motivated front-end developer with a solid foundation in HTML, CSS, and JavaScript, including proficiency in React. A quick learner known for dedicated work ethic and keen problem-solving abilities. Eager to contribute technical acumen and enthusiasm for crafting seamless user interfaces in a dynamic team environment.</p>
+            <p>Motivated Full Stack Web Developer with expertise in JavaScript and the MERN stack. Skilled in designing and implementing efficient server-side APIs and creating seamless frontend components using React.js. Strong problem-solving abilities and attention to detail. Excellent communicator and collaborator, eager to contribute to a dynamic team environment.</p>
             <p>Drop a mail at <a href="mailto:vikramkalra2005@gmail.com" target="_blank">vikramkalra2005@gmail.com</a></p>
         </div>
     )

@@ -8,7 +8,7 @@ export default function Home(){
             <div className={styles.details}>
                 <h1>Hey!</h1>
                 <h1>I am <span>Vikram</span></h1>
-                <h1>React Developer</h1>
+                <h1>Full Stack Web Developer</h1>
                 <a href={Resume} onClick={openResume} download="Vikram-Kalra-Resume">
                     Resume
                 </a>

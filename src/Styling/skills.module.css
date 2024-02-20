@@ -16,6 +16,7 @@ h1{
 
 .cont{
     display: flex;
+    flex-wrap: wrap;
     width: 80%;
     margin: auto;
     justify-content: space-around;
@@ -24,6 +25,7 @@ h1{
 }
 
 .cont>div{
+    margin: 40px;
     border: 1px solid black;
     padding: 20px;
     border-radius: 10px;

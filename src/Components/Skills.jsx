@@ -1,4 +1,5 @@
 import styles from "../Styling/skills.module.css"
+import express from "../Documents/express.png"
 
 export default function Skills(){
     return (
@@ -18,8 +19,20 @@ export default function Skills(){
                     <h1>JavaScript</h1>
                 </div>
                 <div>
+                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/mongodb.svg" alt="ReactJS" />
+                    <h1>MongoDB</h1>
+                </div>
+                <div>
+                    <img src={express} alt="ReactJS" />
+                    <h1>Express</h1>
+                </div>
+                <div>
                     <img src="https://chiranjeev-thapliyal.vercel.app/svg/reactjs.svg" alt="ReactJS" />
                     <h1>React</h1>
+                </div>
+                <div>
+                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/nodejs.svg" alt="ReactJS" />
+                    <h1>Node.js</h1>
                 </div>
             </div>
             <h1>Tech Stacks</h1>
