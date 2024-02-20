@@ -19,11 +19,11 @@ export default function Skills(){
                     <h1>JavaScript</h1>
                 </div>
                 <div>
-                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/mongodb.svg" alt="ReactJS" />
+                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/mongodb.svg" alt="MongoDB" />
                     <h1>MongoDB</h1>
                 </div>
                 <div>
-                    <img src={express} alt="ReactJS" />
+                    <img src={express} alt="Express" />
                     <h1>Express</h1>
                 </div>
                 <div>
@@ -31,7 +31,7 @@ export default function Skills(){
                     <h1>React</h1>
                 </div>
                 <div>
-                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/nodejs.svg" alt="ReactJS" />
+                    <img src="https://chiranjeev-thapliyal.vercel.app/svg/nodejs.svg" alt="NodeJS" />
                     <h1>Node.js</h1>
                 </div>
             </div>
