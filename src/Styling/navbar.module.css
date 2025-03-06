@@ -13,6 +13,11 @@
     justify-content: space-between;
     padding: 0;
     padding-right: 200px;
+
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 .logo img{
@@ -73,4 +78,36 @@
     .logo{
         margin: auto;
     }
+}
+
+.pages a {
+    font-size: 20px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #c7493a;
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.pages a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #c7493a;
+    transition: all 0.3s ease;
+}
+
+.pages a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.pages a:hover {
+    background-color: transparent;
+    color: #a33327;
+    transform: translateY(-2px);
 }

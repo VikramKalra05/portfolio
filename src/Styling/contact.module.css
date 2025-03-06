@@ -4,6 +4,8 @@
     background-color: #c7493a;
     color: white;
     margin-top: 100px;
+    background: linear-gradient(45deg, #c7493a, #d85a4a);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact h2{
@@ -19,17 +21,21 @@
 }
 
 .cont a{
-    border: 1px solid white;
+    border: 2px solid white;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 12px 25px;
     font-weight: 700;
-    background-color: #c7493a;
+    background-color: transparent;
+    transition: all 0.3s ease;
 }
 
 .cont a:hover{
-    background-color: #a33327;
+    background-color: white;
+    color: #c7493a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px){

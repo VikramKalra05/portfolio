@@ -3,6 +3,9 @@
     padding: 100px;
     width: 60%;
     margin: auto;
+    background-color: rgba(199, 73, 58, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 h1{
@@ -19,6 +22,19 @@ h2{
 p{
     font-size: 18px;
     line-height: 1.5;
+}
+
+p a {
+    color: #c7493a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+p a:hover {
+    border-bottom: 2px solid #c7493a;
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px){

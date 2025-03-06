@@ -22,6 +22,15 @@
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     text-align: start;
     margin-top: 50px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.projectDiv:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .projectDiv>div{
@@ -42,22 +51,34 @@
     font-size: 18px;
 }
 
+.projectDiv img {
+    height: 250px;
+    width: 450px;
+    max-width: 450px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
 .links{
     display: flex;
     justify-content: space-around;
 }
 
 .links a{
-    padding: 10px 15px;
+    padding: 12px 25px;
     background-color: #c7493a;
     color: white;
     font-weight: 600;
     text-decoration: none;
     border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(199, 73, 58, 0.2);
 }
 
 .links a:hover{
     background-color: #af2111;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(199, 73, 58, 0.3);
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px){
