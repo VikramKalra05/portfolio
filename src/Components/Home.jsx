@@ -1,39 +1,169 @@
-import styles from "../Styling/home.module.css";
-import photo from "../Documents/Vikram-Kalra-Photo.jpg";
-import Resume from "../Documents/Vikram-Kalra-Resume.pdf";
+import { useState, useEffect } from "react";
+import photo from "../Documents/Vikram-Kalra-Photo.webp";
+import { RESUME_URL } from "../constants";
 
-export default function Home(){
-    return (
-        <div className={styles.home} id="home">
-            <div className={styles.details}>
-                <h1>Hey!</h1>
-                <h1>I am <span>Vikram</span></h1>
-                <h1>Full Stack Web Developer</h1>
-                <a href={Resume} onClick={openResume} download="Vikram-Kalra-Resume">
-                    Resume
-                </a>
-                <div className={styles.links}>
-                    <a href="https://www.linkedin.com/in/vikram-kalra-b66903253/" target="_blank">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAABZtSURBVHic7d170G1nQd/x7yE3wEACCgIJShLuREbR8YYgKN4rSFsqVaHVqtU6lqnTGVvHUey0tlXo2FaqYGutgJdWrDQU2spFpKgwKBIuJnIpIjdNIFwCBMmlf6yXQQROznmz9372Xs/nM/PMfjOTOe/vXfuc9/ntZ631rAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4MiJ0QEmc6L6rOre1X2qi6tPq+5w9Hru0et7qmurDxy9XlW9sbqiurJ6966DA7AuCsB2nV89tPqK6iHVfavbbuDPvbp6VfVb1Qurl1fXb+DPBQCO6V7Vj/WxSfmmHYz3V8+tvruldAAAO3B+9fjqN6sb282k/6nGddVl1WOqs7b5QwPArC6qfrZl0h056X+q8bbqB1quKwAAbqFLqqdWH2n8JH8q4+rqiS0XGwIAp+lO1c9XNzR+Uj/OuKb6/uqMTR8YAFijEy3n+K9q/CS+ifGH1Zdu9AgBwMpcWr2s8ZP2pscN1dOq223uUAHAOjy+ZSOe0ZP1NseV1edu6oABwCE7t3pG4yfnXY3rqids5MgBwIG6Z8uWu6Mn5RHjmdU5t/wQAsBhubTl3vnRE/HI8aLqvFt6IAHgUDys5SE8oyfgfRiXV3e7RUcTAA7Ao9rf3fxGjde3PLkQAFbpYdWHGj/h7uN4fXXnYx9ZANhTD2zZHW/0RLvP4+Utd0UAwCpcUr2j8RPsIYzn5+4AgFWZdU/4c6sXV/cYnONQXNzyIKHnjg4CALfELzb+U/Uhjm85zsEGgH3wnY2fSA91vK+69+kfcgAY69LqA42fSA95vCLXAwAcvJmuAbhV9RvVRaODHLi7VR+ufnt0EAA4Fd/T+E/PaxkfbLkwEAD22qdXVzV+4lzTeN5pvQMAMMDPN37CXON41Om8CQCwS/erbmj8ZLnG8bqWaysAODAz/PL+oeb4OUe4X/Xo0SEA4K+6uPpI4z8pr3m8sjpxqm8IAPth7Z+Mf7A6c3SIlfvc6mtHhwCAj7pjdV3jPyHPMJ5/iu8JAHtizSsAj82Odbvy8Oruo0MAcOrWXAAeNzrARG6VBwUBHJS1Xrx1r+rK1vvz7aPXVQ8YHQKAU7PWFYBvy+S/a/evHjQ6BACnZq0F4OtHB5jU140OAMCpWWMBOK/6vNEhJvXw0QEAODVrLAAPa67HHO+TB1e3GR0CgJu3xgLgU+g4t66+eHQIAG7eGgvAQ0YHmNxDRwcA4OatrQCcqO47OsTk7jc6AAA3b20F4LOq244OMbn7jA4AwM1bWwEw+Yx3n9b39wpgddb2i1oBGO821YWjQwBwcmsrAPcYHYCqLh4dAICTW1sBOG90AKq6/egAAJzc2grA7UYHoPI+AOy9tRWAc0cHoFIAAPbe2gqAiWc/eB8A9tzaCsA5owNQLVsCA7DH1lYAPjA6AFVdOzoAACe3tgLw/tEBqLwPAHtvbQXAJ8/9oAAA7Lm1FQATz37wPgDsubUVgHePDkDlfQDYe2srAK8fHYDK+wCw99ZWAK4cHYCurt41OgQAJ7e2AnDF6AAoYQCHYG0F4N359DmaAgBwANZWAKpeNTrA5C4fHQCAm7fGAvDi0QEm96LRAQC4eWssAC8cHWBi76peMzoEADdvjQXg5XkmwCgvrG4cHQKAm7fGAvAX1UtHh5iU5X+AA7HGAlD17NEBJnRj9ZzRIQCY2x2r66qbjJ2NF5zSOwPAXljrCsC7q/81OsRknjE6AACnbq0FoOrpowNM5Lrq10eHAODUrbkAPKdlX3q271nVe0eHAODUnTE6wBbdUN2mevjoIBP49uodo0MAwEedV72n8RfIrXlcdsrvBgB7Y80rAFUfru5QPXh0kBX7jupPR4cAgL/qLtUHG/9JeY3jRafxPgCwR9a+AlB1bXV29eWjg6zMjdVjq7eNDgIAn8ptqjc2/hPzmsbPnNY7AACDPLLxk+Zaxruqzzi9ww8A41zW+MlzDeM7T/fAA8BIF1RXNX4CPeTxvNa9gRQAK/V1LRewjZ5ID3G8s+WuCgAO3Ax3AfxVb6huX33J6CAH5sbq0dWrRwcBgOM6u3pZ4z9RH9L40WMdaQDYM3eq/rjxE+shjF/OeX8AVuSSlvPaoyfYfR4vrM457gEGgH31BdX7Gz/R7uO4vDr/+IcWAPbbV1cfaPyEu0/jtdVdb8lBBYBD8IXV1Y2fePdhvDw7/QEwkftXb238BDxyvKC63S09kABwaC6uXtf4iXjEeHrLLZIAMKVzq2c2fkLe1biuesJGjhwArMDjqw82foLe5viT6os2dcAAYC0e1HI73OiJehvjGbnNDwA+pTNblsjf1/hJexPjDdXXbPQIAcCKfXb17MZP4McdH2rZ0//Wmz4wADCDB1eXNX5CP9Xx4eqp1YXbOBgAMJsvaSkCNzZ+kv9k47qWif+CbR0AAJjZA6qfrN7e+En/pur3q3+Y3fwAYCfOqL6++pXqmnY76b+pelJ16dZ/SgAO3onRAVbsjOpzq0ccjS9rsxffXV29qHp+9dKWh/cAwClRAHbnrOqi6n7Vfav7VJe07Lt/XnX7o6/Pqa5teUTxR8dVLbfu/VF1ZXVF9bbdxgcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4y06MDgAwqRPV+Sd5rfpQdd3R19dX7z/6+obqPdV7dxWW9VEAADbvrOre1SXVhdVdqrsfvV5Y3a264wa+z43VNS1l4Jq/9PWfVW+v/rR6S/XWo/EXG/ierIQCAHDLXFRdejQ+p3pAdd/q7JGhPombqndWf1K9tvqj6jVHr28ZmItBFACAU3eiun/1sOrLq4dWnzky0Ia8r6UI/H71e0fj9UMTsXUKAMDJ3b16ZPXwlgn/TmPj7MxVLUXgd6uXHH19/dBEALBl96ieUP3flvPsNxldW11WfXd1wbGPLADsmYurJ1aXN36y3fdxY/WK6keqex7jWLMHZjkFcOfqx0eHWJl3Vj88OsQW/ER13ugQB+45LZ8UD8FZLcv73109orrV2DgH62XVL1W/2nIHAuyNezW+Ma9tXHla78DheHvjj+2hjyee7kEf4KLqX1TvaPzxWtP4SPW86ptSpvaeNwiYyaXVL7Zc4f5DLfflszlnVl9b/ffqDdUPtpn9DtgCBQCYwRdWz245v/+46oyxcaZwUfWvWvYdeErLNRbsEQUAWLMHV/+n5Rz1I5vnuqd9cm71D6orqqe23FbJHlAAgDW6sGWp/yXVVw3OwuKslost39BSBO42Ng4KALAm57Zc3Pf6lqV+n/j3z9ktReCPW24jPGdsnHkpAMAanKge33J3yg9Vtx4bh1PwadWPVa/OKs0QCgBw6O5a/Ub1X7KsfIju1XKdxmXVZw3OMhUFADhUJ1qWkq9oucCPw/bXWu7S+JbRQWahAACH6B7Vb7ZcTHb7sVHYoPOqZ7ZcwOl93TIFADg0j6z+oPrK0UHYmse1rAZ82egga6YAAIfirOrJLef77zA4C9v32dWLqu8fHWStFADgEFzQMhn8QG7tm8mZ1b+rntZSANkgBQDYdw+pXtmyqx9z+q7qf+e5AhulAAD77JtbbhG70+ggDPfwli2dPVNgQxQAYF89oeUZ8zb14aPuWb20esDoIGugAAD75ozqp6ufyu8oPtFdqhdWDxwd5ND5xwXskzNa7gH/vtFB2Gt3rn6r+qLBOQ6aAgDsi49O/naC41TcoeXCQCsBx6QAAPvA5M9xnFc9N88QOBYFABjtzOqXM/lzPBdU/7M6f3SQQ6MAAKM9pXrM6BActEurZ+eOkdOiAAAj/XDLE/3glnpoy66BnCIFABjlb1f/bHQIVuW7qr83OsShUACAEb6i+oXs68/m/XT1+aNDHAIFANi1u1e/Wp09OgirdOvq1/LcgJulAAC7dFbLFf+fMToIq3aP6j+ODrHvFABgl56cp/qxG49ueZgUn4ICAOzKY6rvHx2CqTyl5dkBfBIKALALd61+dnQIpvPp1dNGh9hXCgCwCz+Ti7IY4xurvzU6xD5SAIBt+7bqUaNDMLUnV582OsS+UQCAbfrM6t+ODsH0Lqz+6egQ+0YBALbpx7P0z374x9W9RofYJwoAsC2fV/3d0SHgyDnVT44OsU8UAGBbfiK/Y9gvj6q+aHSIfeEfJ7Bpd6u+t3rE6CDwSXgA1ZEzRwcAVue7RgeAk/jqlkcH//boIKNZAQBgNv98dIB9oAAAMJuHHI2pKQAAzOgfjQ4wmgIAwIweVV0yOsRICgAAM7pVkz+dUgEAYFbfUZ03OsQoCgAAs7pd9fjRIUZRAACY2XeODjCKAgDAzB7Y8tyK6SgAAMzu20cHGEEBAGB231rdenSIXVMAAJjdHatvGB1i1xQAAKi/MTrArikAAFDfWN1mdIhdUgAAoM5teVTwNBQAAFhMdRpAAQCAxTdWZ40OsSsKAAAszq++eHSIXVEAAOBjvmZ0gF1RAADgY752dIBdUQAA4GMeVN15dIhdUAAA4GNONMntgAoAAHy8h48OsAsKAAB8vC8bHWAXFAAA+Hj3ru46OsS2KQAA8Im+dHSAbVMAAOATrf40gAIAAJ9IAQCACT2wOmd0iG06c3QAgEGur66s3li96Wi8rXpXdfXR64erDx69ftSZ1e2qM1o2jLlTdUF1l+q+1f2r+1V33MUPwdacXX1O9YrRQbZFAQBm8fbqBdXvVH9QXV5dd4w/5/rqmqOvrz7J/3dJ9ZCj8ZXVZx/jezHW56cAABycm6rfq/5b9bzqih1//zcejV84+u8vqP569c3VxTvOwvF8/ugA26QAAGvz5upp1TOrt4yN8nFecTR+uOWBM9939OparP31oNEBtslfPGAtXlI9srpn9S/br8n/L7uxem71DdXnVf9jbBxO4nOqs0aH2BYFADh0v1t9VfXQ6rLqhrFxTsvl1aNaNp151eAsfKKzWwrlKikAwKF6R/Vt1YOr5w/Ockv9bss1Av+k412YyPbcb3SAbVEAgEP01JZb7p7ZcrHfGlxf/euW1YA3Ds7Cx9x/dIBtUQCAQ3J19U3V91TvG5xlW17ZcvX5c0cHoVIAAIa7vGWZ/Nmjg+zAe1suaPy50UFwCgBgpF9vWRr/k9FBduiG6u9X/350kMndpzoxOsQ2KADAvvulls1zPjA6yAA3VU+o/tPoIBO7TXW30SG2QQEA9tnPVY9ruUBuVje1XPPwvNFBJnbJ6ADboAAA++rZ1fe2bJwzu+urb63eMDrIpFa5dbMCAOyj364e22Ft6rNt17Q8S8A+AbunAADswFurv5mJ7pN5dfUjo0NMSAEA2LK/qB5TXTU6yB57cvXS0SEmc9HoANugAAD75Iktj/DlU7ux5fbAmS+M3LULRwfYBgUA2Be/Xz1pdIgD8dpsErRLd63OGB1i0xQAYB98pPo7R6+cmh9tzr0RRjirutPoEJumAAD74Cktn2o5dVdV/2F0iIlcMDrApikAwGhXVz82OsSBelL1odEhJqEAAGzYT1TvGR3iQP15yyOR2b7VbQesAAAjvaNl+Z/j+6mW7YLZrs8cHWDTFABgpH9TfXB0iAP32tw6uQufMTrApikAwCjvz61sm/JfRweYwJ1HB9g0BQAY5T9X7x0dYiV+LQ9N2jYrAAAb8vOjA6zIW6vfGR1i5awAAGzA66pXjQ6xMk4DbJeNgAA24OmjA6zQs3I3wDadPzrApikAwK7dVP3K6BAr9PbqitEhVuycli2BV0MBAHbtxdWbR4dYqRePDrBy544OsEkKALBrzxodYMVeMjrAyt1+dIBNUgCAXXv+6AArZgVgu6wAABzT23KeepveVr1pdIgVUwAAjuk3RweYgP0AtscpAIBjsvy/fa8ZHWDFrAAAHMNN1QtGh5jAa0cHWLHbjQ6wSQoAsCtvqt45OsQEFIDtsQIAcAyvHB1gEm+urh0dYqUUAIBj+MPRASZxU/VHo0OslFMAAMegAOyOWy23QwEAOAYFYHfeMjrASt12dIBNUgCAXfjzlk1q2I23jg6wUmeMDrBJCgCwC85J79afjg6wUmeODrBJCgCwC7an3S0FYDusAACcpv83OsBkFIDtsAIAcJoUgN26pvrg6BArdNboAJukAAC74BTA7r17dIAVcgoA4DQpALunAGyeUwAAp+HD1Z+NDjGha0YHWCEFAOA0XNWyPS27pQBsnlMAAKfhqtEBJuUUwOZZAQA4DVePDjApKwCb5y4AgNPw56MDTOoDowOskFMAAKfBCsAYHxodYIWcAgA4Da4BGMNGQJt3YnSATVIAgG177+gAk7ICwEkpAMC2ORc9hgLASSkAwLZZih7DceekFABg264dHWBSHxkdgP2mAADb5hTAGDeODsB+UwCAbVMAxrhhdAD2mwIAbJuL0cZQADgpBQDYtutHB5iUBzBxUgoAsG0+iY7huHNSCgCwbVYAxnARICelAADb5pPoGI47J6UAANtmIhrDCgAnpQAA26YAjKEAcFIKALBtrkYfQ/HipBQAgHWyAsBJKQAA66QAcFIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmpAAAwIQUAACYkAIAABNSAABgQgoAAExIAQCACSkAADAhBQAAJqQAAMCEFAAAmJACAAATUgAAYEIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmpAAAwIQUAACYkAIAABNSAABgQgoAAExIAQCACSkAADAhBQAAJqQAAMCEFAAAmJACAAATUgAAYEIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmpAAAwIQUAACYkAIAABNSAABgQgoAAExIAQCACSkAADAhBQAAJqQAAMCEFAAAmJACAAATUgAAYEIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmpAAAwIQUAACYkAIAABNSAABgQgoAAExIAQCACSkAADAhBQAAJqQAAMCEFAAAmJACAAATUgAAYEIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmpAAAwIQUAACYkAIAABNSAABgQgoAAExIAQCACSkAADAhBQAAJqQAAMCEFAAAmJACAAATUgAAYEIKAABMSAEAgAkpAAAwIQUAACakAADAhBQAAJiQAgAAE1IAAGBCCgAATEgBAIAJKQAAMCEFAAAmdOboADtyXfUHo0OszJtHB9iSy6u3jw6xMh8ZHWBSb6i+anSIlXnf6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGzF/wfhI1BPNEPXVwAAAABJRU5ErkJggg==" alt="LinkedIn" />
-                    </a>
-                    <a href="https://github.com/VikramKalra05" target="_blank">
-                        {/* <img src="https://huzaifa-sheikh.netlify.app/static/media/github.f11021803f68852df283.png" alt="GitHub" /> */}
-                        <svg aria-hidden="true" height="24" viewBox="0 0 24 24" version="1.1" width="24" data-view-component="true" class="octicon octicon-mark-github">
-                            <path d="M12.5.75C6.146.75 1 5.896 1 12.25c0 5.089 3.292 9.387 7.863 10.91.575.101.79-.244.79-.546 0-.273-.014-1.178-.014-2.142-2.889.532-3.636-.704-3.866-1.35-.13-.331-.69-1.352-1.18-1.625-.402-.216-.977-.748-.014-.762.906-.014 1.553.834 1.769 1.179 1.035 1.74 2.688 1.25 3.349.948.1-.747.402-1.25.733-1.538-2.559-.287-5.232-1.279-5.232-5.678 0-1.25.445-2.285 1.178-3.09-.115-.288-.517-1.467.115-3.048 0 0 .963-.302 3.163 1.179.92-.259 1.897-.388 2.875-.388.977 0 1.955.13 2.875.388 2.2-1.495 3.162-1.179 3.162-1.179.633 1.581.23 2.76.115 3.048.733.805 1.179 1.825 1.179 3.09 0 4.413-2.688 5.39-5.247 5.678.417.36.776 1.05.776 2.128 0 1.538-.014 2.774-.014 3.162 0 .302.216.662.79.547C20.709 21.637 24 17.324 24 12.25 24 5.896 18.854.75 12.5.75Z"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div className={styles.photo}>
-                <img src={photo} alt="Vikram Kalra" />
-            </div>
+const roles = [
+  "Full Stack Developer",
+  "Startup Founder & CTO",
+  "Next.js Developer",
+  "TypeScript Engineer",
+];
+
+export default function Home() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && text === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && text === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else {
+      timeout = setTimeout(
+        () => {
+          setText(
+            currentRole.substring(
+              0,
+              isDeleting ? text.length - 1 : text.length + 1,
+            ),
+          );
+        },
+        isDeleting ? 50 : 100,
+      );
+    }
+
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
+
+  return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center px-6 md:px-16 lg:px-24 relative overflow-hidden"
+    >
+      {/* Background decorative elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between gap-12 relative z-10">
+        {/* Text content */}
+        <div className="flex-1 text-center md:text-left animate-fade-in-up">
+          <p className="text-accent font-mono text-sm md:text-base mb-4 tracking-wider">
+            &lt;Hello World /&gt;
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 text-text-primary">
+            Hey! I'm
+          </h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+            Vikram Kalra
+          </h1>
+          <div className="h-10 md:h-12 flex items-center justify-center md:justify-start">
+            <span className="text-xl md:text-2xl font-medium text-text-secondary">
+              {text}
+            </span>
+            <span className="text-xl md:text-2xl font-medium text-primary animate-blink ml-0.5">
+              |
+            </span>
+          </div>
+
+          <p className="text-text-muted mt-6 max-w-lg text-base md:text-lg leading-relaxed mx-auto md:mx-0">
+            Building efficient, scalable web applications with modern
+            technologies. Passionate about clean code and great user
+            experiences.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex items-center gap-4 mt-8 justify-center md:justify-start">
+            <a
+              href={RESUME_URL}
+              download="Vikram-Kalra-Resume.pdf"
+              rel="noopener noreferrer"
+              className="px-7 py-3 font-semibold text-white bg-gradient-to-r from-primary to-primary-dark rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1"
+            >
+              Download CV
+            </a>
+            <a
+              href="#contact"
+              className="px-7 py-3 font-semibold text-text-primary border border-surface-lighter rounded-xl hover:border-primary/50 hover:bg-surface-light transition-all duration-300 hover:-translate-y-1"
+            >
+              Let's Talk
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4 mt-8 justify-center md:justify-start">
+            <a
+              href="https://www.linkedin.com/in/vikram-kalra-b66903253/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 group"
+              aria-label="LinkedIn"
+            >
+              <svg
+                className="w-5 h-5 text-text-muted group-hover:text-primary-light transition-colors"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/VikramKalra05"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 group"
+              aria-label="GitHub"
+            >
+              <svg
+                className="w-5 h-5 text-text-muted group-hover:text-primary-light transition-colors"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+            </a>
+            <a
+              href="mailto:vikramkalra2005@gmail.com"
+              className="p-3 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 group"
+              aria-label="Email"
+            >
+              <svg
+                className="w-5 h-5 text-text-muted group-hover:text-primary-light transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
-    )
-} 
 
-const openResume = () => {
-    window.open(
-        "https://drive.google.com/file/d/14RGDaZZfI1sZrR_r12skkxdfXOk0hgwr/view?usp=sharing",
-        "_blank"
-    )
+        {/* Profile Photo */}
+        <div
+          className="flex-shrink-0 animate-fade-in-up"
+          style={{ animationDelay: "0.2s" }}
+        >
+          <div className="relative group">
+            {/* Glow ring */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+            <img
+              src={photo}
+              alt="Vikram Kalra"
+              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-surface-light group-hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,47 +1,197 @@
-import styles from "../Styling/projects.module.css"
-import projectPhoto from "../Documents/myntra.png"
-import projectPhoto1 from "../Documents/fathom.png";
+import walletPhoto from "../Documents/my-wallet.webp";
+import projectPhoto from "../Documents/myntra.webp";
+import datacrecyCover from "../Documents/datacrecy-cover.png";
 
-export default function Projects(){
-    return (
-        <div className={styles.projects} id="projects">
-            <h1>Projects</h1>
-            <div className={styles.cont}>
-                <div className={styles.projectDiv}>
-                    <img src={projectPhoto} alt="Myntra" />
-                    <div>
-                        <h2>Myntra Clone</h2>
-                        <ul>
-                            <li>Cloned Myntra's original website</li>
-                            <li>Dynamic men/women/kids clothes section</li>
-                            <li>Register, login, and logout functionalities</li>
-                            <li>User-friendly navigation</li>
-                        </ul>
-                        <p>Tech Stack - MongoDB | Express | React | Node.js | Git | Chakra UI</p>
-                        <div className={styles.links}>
-                            <a href="https://myntra-three.vercel.app/" target="_blank">Website</a>
-                            <a href="https://github.com/VikramKalra05/Myntra-Clone" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.projectDiv}>
-                    <img src={projectPhoto1} alt="Fathom Health" />
-                    <div>
-                        <h2>Fathom Health Clone</h2>
-                        <ul>
-                            <li>Cloned Fathom Health's design</li>
-                            <li>Dynamic news section</li>
-                            <li>Featured news highlights</li>
-                            <li>User-friendly navigation</li>
-                        </ul>
-                        <p>Tech Stack - React | CSS | Chakra UI | Git</p>
-                        <div className={styles.links}>
-                            <a href="https://fathom-health.vercel.app/" target="_blank">Website</a>
-                            <a href="https://github.com/VikramKalra05/Fathom-Health" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+const projects = [
+  {
+    title: "Datacrecy",
+    image: datacrecyCover,
+    featured: true,
+    description: [
+      "Co-founded and lead engineering for a B2B lead-generation platform competing with Apollo.io and ZoomInfo",
+      "Built the customer app, marketing site, admin portal, and a programmatic SEO surface with Next.js and TypeScript",
+      "Designed ClickHouse-backed pipelines that ingest, enrich, and serve lead data",
+      "Own cloud infrastructure on DigitalOcean, Vercel, and Supabase — auth, analytics, and transactional email",
+    ],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "ClickHouse",
+      "Supabase",
+      "DigitalOcean",
+      "Vercel",
+      "ETL",
+    ],
+    liveUrl: "https://datacrecy.com",
+    liveLabel: "Visit Datacrecy",
+  },
+  {
+    title: "My Wallet",
+    image: walletPhoto,
+    description: [
+      "Full-stack personal finance app to track income, expenses, and financial insights",
+      "Interactive analytics dashboard with spending visualizations",
+      "Secure auth using JWT, Google OAuth, and HTTP-only cookies",
+      "Modular backend architecture, deployed on Vercel",
+    ],
+    techStack: [
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js",
+      "MUI",
+      "JWT",
+      "Google OAuth",
+    ],
+    liveUrl: "https://my-wallet-frontend-liard.vercel.app/",
+    githubUrl: "https://github.com/VikramKalra05/My-Wallet",
+  },
+  {
+    title: "Myntra Clone",
+    image: projectPhoto,
+    description: [
+      "Cloned Myntra's original website",
+      "Dynamic men/women/kids clothes section",
+      "Register, login, and logout functionalities",
+      "User-friendly navigation",
+    ],
+    techStack: ["MongoDB", "Express", "React", "Node.js", "Git", "Chakra UI"],
+    liveUrl: "https://myntra-three.vercel.app/",
+    githubUrl: "https://github.com/VikramKalra05/Myntra-Clone",
+  },
+];
+
+function ProjectCard({
+  title,
+  image,
+  description,
+  techStack,
+  liveUrl,
+  liveLabel = "Live Demo",
+  githubUrl,
+  featured = false,
+  index,
+}) {
+  return (
+    <div
+      className={`glass rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 animate-fade-in-up flex flex-col ${
+        featured ? "md:col-span-2" : ""
+      }`}
+      style={{ animationDelay: `${index * 150}ms` }}
+    >
+      {/* Image */}
+      <div className="relative overflow-hidden group">
+        <img
+          src={image}
+          alt={title}
+          className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+            featured ? "h-64 md:h-80" : "h-56 md:h-64"
+          }`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+
+      {/* Content */}
+      <div className="p-6 md:p-8 flex flex-col flex-1">
+        <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4">
+          {title}
+        </h3>
+
+        <ul className="space-y-2 mb-5">
+          {description.map((item, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm md:text-base text-text-secondary"
+            >
+              <span className="text-accent mt-0.5 flex-shrink-0">▹</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        {/* Tech Stack Badges */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {techStack.map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 text-xs font-mono font-medium text-primary-light bg-primary/10 border border-primary/20 rounded-full"
+            >
+              {tech}
+            </span>
+          ))}
         </div>
-    )
-} 
+
+        {/* Links */}
+        <div className="flex items-center gap-3 mt-auto">
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 text-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary to-primary-dark rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+              {liveLabel}
+            </span>
+          </a>
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center px-5 py-2.5 text-sm font-semibold text-text-primary border border-surface-lighter rounded-xl hover:border-primary/50 hover:bg-surface-light transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <span className="flex items-center justify-center gap-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+                Source Code
+              </span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section id="projects" className="py-24 px-6 md:px-16 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-accent font-mono text-sm tracking-wider mb-3">
+            {"// what I've built"}
+          </h2>
+          <h1 className="text-3xl md:text-4xl font-bold gradient-text inline-block">
+            Featured Projects
+          </h1>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} {...project} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
