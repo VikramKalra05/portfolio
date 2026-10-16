@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.5578ebb9.css",
-    "main.js": "/portfolio/static/js/main.946986f9.js",
+    "main.css": "/portfolio/static/css/main.621ff9e8.css",
+    "main.js": "/portfolio/static/js/main.fa72bbdd.js",
     "static/js/787.2dcca737.chunk.js": "/portfolio/static/js/787.2dcca737.chunk.js",
-    "static/media/Vikram-Kalra-Resume.pdf": "/portfolio/static/media/Vikram-Kalra-Resume.2406c79dd3ae588e28bf.pdf",
-    "static/media/myntra.png": "/portfolio/static/media/myntra.c8db22ae9c50dd7cda8b.png",
-    "static/media/Vikram-Kalra-Photo.jpg": "/portfolio/static/media/Vikram-Kalra-Photo.8ba829a4da978616bf70.jpg",
-    "static/media/fathom.png": "/portfolio/static/media/fathom.635a5b76371ffd1b69cd.png",
-    "static/media/express.png": "/portfolio/static/media/express.abf1d8c99b3e1af830da.png",
+    "static/media/datacrecy-cover.png": "/portfolio/static/media/datacrecy-cover.35dbe0b573cacdf44348.png",
+    "static/media/myntra.webp": "/portfolio/static/media/myntra.a93de53a25fe9c62a007.webp",
+    "static/media/Vikram-Kalra-Photo.webp": "/portfolio/static/media/Vikram-Kalra-Photo.e31996c6c21d8a6a9b2c.webp",
+    "static/media/my-wallet.webp": "/portfolio/static/media/my-wallet.54318079bc4b2089133d.webp",
     "index.html": "/portfolio/index.html",
-    "main.5578ebb9.css.map": "/portfolio/static/css/main.5578ebb9.css.map",
-    "main.946986f9.js.map": "/portfolio/static/js/main.946986f9.js.map",
+    "main.621ff9e8.css.map": "/portfolio/static/css/main.621ff9e8.css.map",
+    "main.fa72bbdd.js.map": "/portfolio/static/js/main.fa72bbdd.js.map",
     "787.2dcca737.chunk.js.map": "/portfolio/static/js/787.2dcca737.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5578ebb9.css",
-    "static/js/main.946986f9.js"
+    "static/css/main.621ff9e8.css",
+    "static/js/main.fa72bbdd.js"
   ]
 }
